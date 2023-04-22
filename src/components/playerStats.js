@@ -6,6 +6,7 @@ function PlayerStats() {
   const [playerData, setPlayerData] = useState(null);
   const [playerId, setPlayerId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [selectedPlayers, setSelectedPlayers] = useState([]); // state that manages selected players
 
   const handleClick = (id) => {
     setPlayerId(id);
@@ -42,8 +43,22 @@ function PlayerStats() {
       {playerStats.map((player) => (
         <div
           key={player.person.id}
-          className="p-4 bg-white rounded-lg shadow-md flex flex-col items-center"
+          className="p-4 bg-white rounded-lg shadow-md flex flex-col items-center relative"
         >
+          <label className="absolute top-0 right-0 inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="form-checkbox h-5 w-5 text-blue-600"
+              checked={selectedPlayers.includes(player.person.id)}
+              onChange={() => {
+                if (selectedPlayers.includes(player.person.id)) {
+                  setSelectedPlayers(selectedPlayers.filter((id) => id !== player.person.id));
+                } else {
+                  setSelectedPlayers([...selectedPlayers, player.person.id]);
+                }
+              }}
+            />
+          </label>
           <img
             className="w-32 h-32 object-cover"
             src={`https://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
@@ -56,7 +71,7 @@ function PlayerStats() {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             Show more player stats
           </button>
-        </div>
+      </div>
       ))}
       {playerData && (
         <div className={`fixed inset-0 ${showModal ? "" : "hidden"}`}>
