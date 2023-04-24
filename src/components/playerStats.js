@@ -38,14 +38,14 @@ function PlayerStats() {
     }
   }, [playerId]);
 
-  return (
-    <div className="grid grid-cols-3 gap-4">
+  return ( 
+    <div className="grid grid-cols-3 gap-4 mx-4">
       {playerStats.map((player) => (
         <div
           key={player.person.id}
           className="p-4 bg-white rounded-lg shadow-md flex flex-col items-center relative"
         >
-          <label className="absolute top-0 right-0 inline-flex items-center cursor-pointer">
+          <label className="absolute top-2 right-2 inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
               className="form-checkbox h-5 w-5 text-blue-600"
@@ -75,31 +75,66 @@ function PlayerStats() {
       ))}
       {playerData && (
         <div className={`fixed inset-0 ${showModal ? "" : "hidden"}`}>
-          <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <ul>
-                <h2>Game Stats</h2>
-                <li>Games: {playerData.games}</li>
-                <li>Time on Ice: {playerData.timeOnIce}</li>
-                <li>Goals: {playerData.goals}</li>
-                <li>Assists: {playerData.assists}</li>
-                <li>Points: {playerData.points}</li>
-                <h2> Power Play Stats:</h2>
-                <li>Power Play Goals: {playerData.powerPlayGoals}</li>
-                <li>Power Play Points: {playerData.powerPlayPoints}</li>
-                <h2>Other On Ice Stats:</h2>
-                <li>PIM: {playerData.pim}</li>
-                <li>Shots: {playerData.shots}</li>
-                <li>Hits: {playerData.hits}</li>
-              </ul>
-              <button onClick={() => setShowModal(false)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Close
-              </button>
-            </div>
+        <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <table className="table-auto">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2"></th>
+                  <th className="px-4 py-2">Player Stats Continued</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Games:</td>
+                  <td className="border px-4 py-2">{playerData.games}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Time on Ice:</td>
+                  <td className="border px-4 py-2">{playerData.timeOnIce}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Goals:</td>
+                  <td className="border px-4 py-2">{playerData.goals}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Assists:</td>
+                  <td className="border px-4 py-2">{playerData.assists}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Points:</td>
+                  <td className="border px-4 py-2">{playerData.points}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Power Play Goals:</td>
+                  <td className="border px-4 py-2">{playerData.powerPlayGoals}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Power Play Points:</td>
+                  <td className="border px-4 py-2">{playerData.powerPlayPoints}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">PIM:</td>
+                  <td className="border px-4 py-2">{playerData.pim}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Shots:</td>
+                  <td className="border px-4 py-2">{playerData.shots}</td>
+                </tr>
+                <tr>
+                  <td className="border px-4 py-2 font-medium">Hits:</td>
+                  <td className="border px-4 py-2">{playerData.hits}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button onClick={() => setShowModal(false)}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">
+              Close
+            </button>
           </div>
         </div>
+      </div>
       )}
     </div>
   );
